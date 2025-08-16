@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jewellery Boutique</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1 class="animated-title">Jewellery Boutique</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Collections</a>
+            <a href="#">Rings</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Shine Bright With Our Latest Collection</h2>
+            <p>Discover handcrafted jewellery, designed to make every moment sparkle.</p>
+            <button id="exploreBtn">Explore Now</button>
+        </div>
+        <img src="jew.jpg" alt="Jewellery" class="hero-img">
+    </section>
+    <main>
+        <h2 class="section-title">Featured Jewellery</h2>
+        <div class="jewellery-grid" id="jewelleryGrid">
+            <!-- Cards will be animated in by JS -->
+            <div class="jewellery-card">
+                <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Ring">
+                <h3>Diamond Ring</h3>
+                <p>Elegant diamond ring perfect for any occasion.</p>
+            </div>
+            <div class="jewellery-card">
+                <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=400&q=80" alt="Necklace">
+                <h3>Gold Necklace</h3>
+                <p>Handcrafted gold necklace that glows with beauty.</p>
+            </div>
+            <div class="jewellery-card">
+                <img src="https://images.unsplash.com/photo-1519864600265-abb254a7b2b7?auto=format&fit=crop&w=400&q=80" alt="Earrings">
+                <h3>Gemstone Earrings</h3>
+                <p>Colorful gemstone earrings to match your style.</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Jewellery Boutique. All rights reserved.</p>
+    </footer>
+    <script src="script.js">
+        document.addEventListener('DOMContentLoaded', () => {
+    // Animate jewellery cards in sequence
+    const cards = document.querySelectorAll('.jewellery-card');
+    cards.forEach((card, i) => {
+        card.style.animationDelay = (0.4 + i * 0.2) + 's';
+    });
+
+    // Smooth scroll to cards when "Explore Now" is clicked
+    document.getElementById('exploreBtn').addEventListener('click', () => {
+        document.getElementById('jewelleryGrid').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Optional: Add more interactive animations or features
+});
+    </script>
+</body>
+</html>
