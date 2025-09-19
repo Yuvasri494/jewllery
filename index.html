@@ -1,69 +1,909 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Jewellery Boutique</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Jewellery Boutique - Luxury Handcrafted Jewelry</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-gold: #d4af37;
+    --secondary-gold: #b8860b;
+    --dark-navy: #1a1a2e;
+    --soft-white: #fafafa;
+    --light-gray: #f5f5f5;
+    --text-dark: #333;
+    --shadow: 0 10px 30px rgba(0,0,0,0.1);
+    --gradient-gold: linear-gradient(135deg, #d4af37, #ffd700, #b8860b);
+    --gradient-dark: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+}
+
+body {
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    overflow-x: hidden;
+    background: var(--soft-white);
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(135deg, rgba(26,26,46,0.95), rgba(15,52,96,0.95));
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.animated-title {
+    font-size: 2rem;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s infinite;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+nav {
+    display: flex;
+    gap: 2rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    position: relative;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+}
+
+nav a:hover {
+    color: var(--primary-gold);
+    background: rgba(212,175,55,0.1);
+    transform: translateY(-2px);
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background: var(--primary-gold);
+    transition: all 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    background: var(--gradient-dark);
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1920&q=80') center/cover;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content {
+    color: white;
+    animation: slideInLeft 1s ease-out;
+}
+
+.hero-content h2 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+    font-weight: bold;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+    line-height: 1.8;
+}
+
+.explore-btn {
+    background: var(--gradient-gold);
+    color: var(--dark-navy);
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.explore-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(212,175,55,0.5);
+    background: linear-gradient(135deg, #ffd700, #d4af37);
+}
+
+.hero-image {
+    position: relative;
+    animation: slideInRight 1s ease-out;
+}
+
+.hero-img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.hero-img:hover {
+    transform: scale(1.05);
+}
+
+/* Floating Elements */
+.floating-gem {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--gradient-gold);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+    opacity: 0.7;
+}
+
+.floating-gem:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+.floating-gem:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
+.floating-gem:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* Main Content */
+main {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--gradient-gold);
+    border-radius: 2px;
+}
+
+/* Jewellery Grid */
+.jewellery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.jewellery-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.4s ease;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.jewellery-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.jewellery-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-gold);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.jewellery-card:hover::before {
+    transform: scaleX(1);
+}
+
+.jewellery-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.jewellery-card:hover img {
+    transform: scale(1.1);
+}
+
+.card-content {
+    padding: 2rem;
+    text-align: center;
+}
+
+.jewellery-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--dark-navy);
+    font-weight: bold;
+}
+
+.jewellery-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-gold);
+    margin-bottom: 1rem;
+}
+
+.add-to-cart {
+    background: var(--gradient-gold);
+    color: var(--dark-navy);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.add-to-cart:hover {
+    background: linear-gradient(135deg, #ffd700, #d4af37);
+    transform: translateY(-2px);
+}
+
+/* Newsletter Section */
+.newsletter {
+    background: var(--gradient-dark);
+    padding: 4rem 2rem;
+    text-align: center;
+    color: white;
+}
+
+.newsletter-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.newsletter h3 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.newsletter p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.newsletter-form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+    gap: 1rem;
+}
+
+.newsletter input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.newsletter button {
+    background: var(--gradient-gold);
+    color: var(--dark-navy);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.newsletter button:hover {
+    background: linear-gradient(135deg, #ffd700, #d4af37);
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    background: var(--dark-navy);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h4 {
+    color: var(--primary-gold);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.footer-section a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: var(--primary-gold);
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-gold);
+    color: var(--dark-navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #ffd700, #d4af37);
+}
+
+/* Animations */
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--gradient-dark);
+        flex-direction: column;
+        padding: 1rem 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    nav.active {
+        display: flex;
+    }
+    
+    .animated-title {
+        font-size: 1.5rem;
+    }
+    
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+    
+    .jewellery-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-container {
+        padding: 0 1rem;
+    }
+    
+    .hero {
+        padding: 0 1rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+    
+    main {
+        padding: 4rem 1rem;
+    }
+    
+    .newsletter {
+        padding: 3rem 1rem;
+    }
+    
+    .jewellery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.5s ease;
+}
+
+.loading.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(212,175,55,0.3);
+    border-top: 3px solid var(--primary-gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
 </head>
 <body>
-    <header>
-        <h1 class="animated-title">Jewellery Boutique</h1>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">Collections</a>
-            <a href="#">Rings</a>
-            <a href="#">Contact</a>
+<div class="loading" id="loading">
+    <div class="loader"></div>
+</div>
+
+<header id="header">
+    <div class="header-container">
+        <h1 class="animated-title">✨ Jewellery Boutique</h1>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        <nav id="nav">
+            <a href="#home">Home</a>
+            <a href="#collections">Collections</a>
+            <a href="#rings">Rings</a>
+            <a href="#contact">Contact</a>
         </nav>
-    </header>
-    <section class="hero">
+    </div>
+</header>
+
+<section class="hero" id="home">
+    <div class="floating-gem"></div>
+    <div class="floating-gem"></div>
+    <div class="floating-gem"></div>
+    
+    <div class="hero-container">
         <div class="hero-content">
             <h2>Shine Bright With Our Latest Collection</h2>
-            <p>Discover handcrafted jewellery, designed to make every moment sparkle.</p>
-            <button id="exploreBtn">Explore Now</button>
+            <p>Discover handcrafted jewellery, designed to make every moment sparkle. Each piece tells a story of elegance, luxury, and timeless beauty.</p>
+            <button class="explore-btn" id="exploreBtn">Explore Now</button>
         </div>
-        <img src="jew.jpg" alt="Jewellery" class="hero-img">
-    </section>
-    <main>
-        <h2 class="section-title">Featured Jewellery</h2>
-        <div class="jewellery-grid" id="jewelleryGrid">
-            <!-- Cards will be animated in by JS -->
-            <div class="jewellery-card">
-                <img src="jew2.jpg" alt="Ring">
+        <div class="hero-image">
+            <img src="" alt="Luxury Jewellery Collection" class="hero-img">
+        </div>
+    </div>
+</section>
+
+<main>
+    <h2 class="section-title" id="collections">Featured Jewellery</h2>
+    <div class="jewellery-grid" id="jewelleryGrid">
+        <div class="jewellery-card">
+            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80" alt="Diamond Ring">
+            <div class="card-content">
                 <h3>Diamond Ring</h3>
-                <p>Elegant diamond ring perfect for any occasion.</p>
-            </div>
-            <div class="jewellery-card">
-                <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=400&q=80" alt="Necklace">
-                <h3>Gold Necklace</h3>
-                <p>Handcrafted gold necklace that glows with beauty.</p>
-            </div>
-            <div class="jewellery-card">
-                <img src="https://images.unsplash.com/photo-1519864600265-abb254a7b2b7?auto=format&fit=crop&w=400&q=80" alt="Earrings">
-                <h3>Gemstone Earrings</h3>
-                <p>Colorful gemstone earrings to match your style.</p>
+                <p>Elegant diamond ring perfect for any occasion. Handcrafted with precision and attention to detail.</p>
+                <div class="price">$2,499</div>
+                <button class="add-to-cart">Add to Cart</button>
             </div>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2025 Jewellery Boutique. All rights reserved.</p>
-    </footer>
-    <script src="script.js">
-        document.addEventListener('DOMContentLoaded', () => {
+        
+        <div class="jewellery-card">
+            <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=800&q=80" alt="Gold Necklace">
+            <div class="card-content">
+                <h3>Gold Necklace</h3>
+                <p>Handcrafted gold necklace that glows with beauty. A timeless piece for the modern woman.</p>
+                <div class="price">$1,899</div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        
+        <div class="jewellery-card">
+            <img src="https://images.unsplash.com/photo-1519864600265-abb254a7b2b7?auto=format&fit=crop&w=800&q=80" alt="Gemstone Earrings">
+            <div class="card-content">
+                <h3>Gemstone Earrings</h3>
+                <p>Colorful gemstone earrings to match your style. Each stone carefully selected for maximum brilliance.</p>
+                <div class="price">$899</div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        
+        <div class="jewellery-card">
+            <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=800&q=80" alt="Pearl Bracelet">
+            <div class="card-content">
+                <h3>Pearl Bracelet</h3>
+                <p>Classic pearl bracelet with modern elegance. Perfect for both casual and formal occasions.</p>
+                <div class="price">$1,299</div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        
+        <div class="jewellery-card">
+            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80" alt="Sapphire Ring">
+            <div class="card-content">
+                <h3>Sapphire Ring</h3>
+                <p>Stunning sapphire ring with intricate gold detailing. A masterpiece of jewelry craftsmanship.</p>
+                <div class="price">$3,299</div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        
+        <div class="jewellery-card">
+            <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=800&q=80" alt="Emerald Pendant">
+            <div class="card-content">
+                <h3>Emerald Pendant</h3>
+                <p>Exquisite emerald pendant that captures the essence of nature's beauty in precious stone.</p>
+                <div class="price">$2,199</div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<section class="newsletter">
+    <div class="newsletter-container">
+        <h3>Stay Updated</h3>
+        <p>Subscribe to our newsletter and be the first to know about new collections and exclusive offers.</p>
+        <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <a href="#home">Home</a>
+            <a href="#collections">Collections</a>
+            <a href="#rings">Rings</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-section">
+            <h4>Customer Service</h4>
+            <a href="#">Size Guide</a>
+            <a href="#">Shipping Info</a>
+            <a href="#">Returns</a>
+            <a href="#">FAQ</a>
+        </div>
+        <div class="footer-section">
+            <h4>About Us</h4>
+            <a href="#">Our Story</a>
+            <a href="#">Craftsmanship</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+        </div>
+    </div>
+    
+    <div class="social-icons">
+        <a href="#" class="social-icon">f</a>
+        <a href="#" class="social-icon">t</a>
+        <a href="#" class="social-icon">i</a>
+        <a href="#" class="social-icon">p</a>
+    </div>
+    
+    <p>&copy; 2025 Jewellery Boutique. All rights reserved. Crafted with ❤️</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Loading screen
+    const loading = document.getElementById('loading');
+    setTimeout(() => {
+        loading.classList.add('hide');
+    }, 1000);
+
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const nav = document.getElementById('nav');
+    
+    mobileMenuToggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+    });
+
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            header.style.background = 'linear-gradient(135deg, rgba(26,26,46,0.98), rgba(15,52,96,0.98))';
+            header.style.padding = '0.5rem 0';
+        } else {
+            header.style.background = 'linear-gradient(135deg, rgba(26,26,46,0.95), rgba(15,52,96,0.95))';
+            header.style.padding = '1rem 0';
+        }
+    });
+
     // Animate jewellery cards in sequence
     const cards = document.querySelectorAll('.jewellery-card');
-    cards.forEach((card, i) => {
-        card.style.animationDelay = (0.4 + i * 0.2) + 's';
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.animationDelay = '0s';
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 200);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => {
+        observer.observe(card);
     });
 
-    // Smooth scroll to cards when "Explore Now" is clicked
-    document.getElementById('exploreBtn').addEventListener('click', () => {
-        document.getElementById('jewelleryGrid').scrollIntoView({ behavior: 'smooth' });
+    // Smooth scroll for navigation links
+    document.querySelectorAll('nav a, .explore-btn').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            
+            if (targetId === '#home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (targetId === '#collections' || link.id === 'exploreBtn') {
+                document.getElementById('jewelleryGrid').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+            
+            // Close mobile menu if open
+            nav.classList.remove('active');
+        });
     });
 
-    // Optional: Add more interactive animations or features
+    // Add to cart functionality
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const card = e.target.closest('.jewellery-card');
+            const itemName = card.querySelector('h3').textContent;
+            
+            // Add visual feedback
+            button.textContent = 'Added!';
+            button.style.background = '#28a745';
+            
+            // Show notification
+            showNotification(`${itemName} added to cart!`);
+            
+            setTimeout(() => {
+                button.textContent = 'Add to Cart';
+                button.style.background = '';
+            }, 2000);
+        });
+    });
+
+    // Newsletter form
+    document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = e.target.querySelector('input[type="email"]').value;
+        showNotification('Thank you for subscribing!');
+        e.target.reset();
+    });
+
+    // Notification function
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, #d4af37, #ffd700);
+            color: #1a1a2e;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 10000;
+            font-weight: bold;
+            animation: slideInRight 0.5s ease;
+        `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.5s ease';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 500);
+        }, 3000);
+    }
+
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector('.hero::before');
+        if (parallax) {
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translateY(${speed}px)`;
+        }
+    });
+
+    // Add CSS animations for notifications
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
 });
-    </script>
+</script>
 </body>
-
 </html>
