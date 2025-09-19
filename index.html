@@ -611,6 +611,191 @@ footer {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* Rings Section */
+.rings-section {
+    background: var(--light-gray);
+    padding: 6rem 2rem;
+}
+
+.rings-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rings-categories {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    background: white;
+    border: 2px solid var(--primary-gold);
+    color: var(--primary-gold);
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background: var(--gradient-gold);
+    color: var(--dark-navy);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212,175,55,0.3);
+}
+
+.rings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.ring-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.ring-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.ring-card.hidden {
+    display: none;
+}
+
+.ring-image {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+}
+
+.ring-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.ring-card:hover .ring-image img {
+    transform: scale(1.1);
+}
+
+.ring-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(26,26,46,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.ring-card:hover .ring-overlay {
+    opacity: 1;
+}
+
+.quick-view {
+    background: var(--gradient-gold);
+    color: var(--dark-navy);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.quick-view:hover {
+    background: linear-gradient(135deg, #ffd700, #d4af37);
+    transform: scale(1.05);
+}
+
+.ring-info {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.ring-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark-navy);
+    font-weight: bold;
+}
+
+.ring-description {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.ring-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.ring-price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--primary-gold);
+}
+
+.ring-rating {
+    color: var(--primary-gold);
+    font-size: 1rem;
+}
+
+.add-to-cart-ring {
+    background: var(--gradient-gold);
+    color: var(--dark-navy);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.add-to-cart-ring:hover {
+    background: linear-gradient(135deg, #ffd700, #d4af37);
+    transform: translateY(-2px);
+}
 </style>
 </head>
 <body>
@@ -643,7 +828,7 @@ footer {
             <button class="explore-btn" id="exploreBtn">Explore Now</button>
         </div>
         <div class="hero-image">
-            <img src="e541bf08715396fb4e81f9a08fcf1d22.jpg" alt="Luxury Jewellery Collection" class="hero-img">
+            <img src="" alt="Luxury Jewellery Collection" class="hero-img">
         </div>
     </div>
 </section>
@@ -712,6 +897,130 @@ footer {
         </div>
     </div>
 </main>
+
+<section class="rings-section" id="rings">
+    <div class="rings-container">
+        <h2 class="section-title">Exquisite Rings Collection</h2>
+        <p class="section-subtitle">Discover our handpicked selection of engagement rings, wedding bands, and statement pieces</p>
+        
+        <div class="rings-categories">
+            <button class="category-btn active" data-category="all">All Rings</button>
+            <button class="category-btn" data-category="engagement">Engagement</button>
+            <button class="category-btn" data-category="wedding">Wedding Bands</button>
+            <button class="category-btn" data-category="statement">Statement</button>
+        </div>
+
+        <div class="rings-grid" id="ringsGrid">
+            <div class="ring-card" data-category="engagement">
+                <div class="ring-image">
+                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80" alt="Solitaire Diamond Ring">
+                    <div class="ring-overlay">
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                </div>
+                <div class="ring-info">
+                    <h3>Solitaire Diamond Ring</h3>
+                    <p class="ring-description">Classic 1.5ct diamond solitaire in platinum setting</p>
+                    <div class="ring-details">
+                        <span class="ring-price">$4,299</span>
+                        <span class="ring-rating">★★★★★</span>
+                    </div>
+                    <button class="add-to-cart-ring">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="ring-card" data-category="wedding">
+                <div class="ring-image">
+                    <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80" alt="Gold Wedding Band">
+                    <div class="ring-overlay">
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                </div>
+                <div class="ring-info">
+                    <h3>Classic Gold Wedding Band</h3>
+                    <p class="ring-description">Timeless 18k gold band with comfort fit design</p>
+                    <div class="ring-details">
+                        <span class="ring-price">$899</span>
+                        <span class="ring-rating">★★★★★</span>
+                    </div>
+                    <button class="add-to-cart-ring">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="ring-card" data-category="statement">
+                <div class="ring-image">
+                    <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=800&q=80" alt="Ruby Statement Ring">
+                    <div class="ring-overlay">
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                </div>
+                <div class="ring-info">
+                    <h3>Ruby Statement Ring</h3>
+                    <p class="ring-description">Bold ruby center stone with diamond accents</p>
+                    <div class="ring-details">
+                        <span class="ring-price">$3,599</span>
+                        <span class="ring-rating">★★★★★</span>
+                    </div>
+                    <button class="add-to-cart-ring">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="ring-card" data-category="engagement">
+                <div class="ring-image">
+                    <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=800&q=80" alt="Vintage Emerald Ring">
+                    <div class="ring-overlay">
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                </div>
+                <div class="ring-info">
+                    <h3>Vintage Emerald Ring</h3>
+                    <p class="ring-description">Art deco inspired emerald with diamond halo</p>
+                    <div class="ring-details">
+                        <span class="ring-price">$5,299</span>
+                        <span class="ring-rating">★★★★★</span>
+                    </div>
+                    <button class="add-to-cart-ring">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="ring-card" data-category="wedding">
+                <div class="ring-image">
+                    <img src="https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?auto=format&fit=crop&w=800&q=80" alt="Diamond Eternity Band">
+                    <div class="ring-overlay">
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                </div>
+                <div class="ring-info">
+                    <h3>Diamond Eternity Band</h3>
+                    <p class="ring-description">Full circle of brilliant cut diamonds</p>
+                    <div class="ring-details">
+                        <span class="ring-price">$2,799</span>
+                        <span class="ring-rating">★★★★★</span>
+                    </div>
+                    <button class="add-to-cart-ring">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="ring-card" data-category="statement">
+                <div class="ring-image">
+                    <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=800&q=80" alt="Sapphire Cocktail Ring">
+                    <div class="ring-overlay">
+                        <button class="quick-view">Quick View</button>
+                    </div>
+                </div>
+                <div class="ring-info">
+                    <h3>Sapphire Cocktail Ring</h3>
+                    <p class="ring-description">Large sapphire surrounded by white diamonds</p>
+                    <div class="ring-details">
+                        <span class="ring-price">$4,899</span>
+                        <span class="ring-rating">★★★★★</span>
+                    </div>
+                    <button class="add-to-cart-ring">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section class="newsletter">
     <div class="newsletter-container">
@@ -818,10 +1127,95 @@ document.addEventListener('DOMContentLoaded', () => {
                     behavior: 'smooth',
                     block: 'start'
                 });
+            } else if (targetId === '#rings') {
+                document.getElementById('rings').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             }
             
             // Close mobile menu if open
             nav.classList.remove('active');
+        });
+    });
+
+    // Rings section functionality
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const ringCards = document.querySelectorAll('.ring-card');
+
+    categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Update active button
+            categoryBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const category = btn.getAttribute('data-category');
+            
+            // Filter ring cards
+            ringCards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.classList.remove('hidden');
+                    card.style.display = 'block';
+                    // Re-animate the card
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                } else {
+                    card.classList.add('hidden');
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+    });
+
+    // Ring cards animation observer
+    const ringObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.animationDelay = '0s';
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 150);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    ringCards.forEach(card => {
+        ringObserver.observe(card);
+    });
+
+    // Quick view functionality
+    document.querySelectorAll('.quick-view').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const ringCard = btn.closest('.ring-card');
+            const ringName = ringCard.querySelector('h3').textContent;
+            showNotification(`Quick view for ${ringName} - Feature coming soon!`);
+        });
+    });
+
+    // Add to cart for rings
+    document.querySelectorAll('.add-to-cart-ring').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const card = e.target.closest('.ring-card');
+            const itemName = card.querySelector('h3').textContent;
+            
+            // Add visual feedback
+            button.textContent = 'Added!';
+            button.style.background = '#28a745';
+            
+            // Show notification
+            showNotification(`${itemName} added to cart!`);
+            
+            setTimeout(() => {
+                button.textContent = 'Add to Cart';
+                button.style.background = '';
+            }, 2000);
         });
     });
 
@@ -907,4 +1301,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
